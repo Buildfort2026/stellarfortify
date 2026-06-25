@@ -1,21 +1,8 @@
 {
-  "version": 2,
-  "installCommand": "npm install --legacy-peer-deps",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/public",
-  "framework": "vite",
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.ts"
-    },
-    {
-      "source": "/assets/(.*)",
-      "destination": "/dist/public/assets/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/dist/public/$1"
-    }
+    { "source": "/insurance-data.json", "destination": "/insurance-data.json" },
+    { "source": "/logo/(.*)", "destination": "/logo/$1" },
+    { "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json))", "destination": "/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
