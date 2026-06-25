@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/dist/public/assets/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/dist/public/$1"
+    }
+  ]
+}
