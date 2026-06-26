@@ -142,6 +142,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
     // 3. Scatter Chart
     const filtered = companies.filter(
       (c) => c.comp_solvency > 0 && c.core_solvency > 0 && !['人保健康', '恒安标准人寿', '华汇人寿'].includes(c.name);
+    );
     const compTop10 = [...filtered].sort((a, b) => b.comp_solvency - a.comp_solvency).slice(0, 10).map((c) => c.name);
     const coreTop10 = [...filtered].sort((a, b) => b.core_solvency - a.core_solvency).slice(0, 10).map((c) => c.name);
     const showNames = [...new Set([...compTop10, ...coreTop10])];
@@ -509,6 +510,5 @@ function AAAHall({ companies, onCompanyClick }: { companies: Company[]; onCompan
     </div>
   );
 }
-
 
 
