@@ -224,7 +224,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
           trigger: 'item',
           formatter: (p: any) => {
             const d = p.data;
-            return `<b>${p.name}</b><br/>鏈€灏忓€硷細${fmt.pct(d[1])}<br/>Q1锛?{fmt.pct(d[2])}<br/>涓綅鏁帮細${fmt.pct(d[3])}<br/>Q3锛?{fmt.pct(d[4])}<br/>鏈€澶у€硷細${fmt.pct(d[5])}`;
+            return `<b>${p.name}</b><br/>最小值：${fmt.pct(d[1])}<br/>Q1：${fmt.pct(d[2])}<br/>中位数：${fmt.pct(d[3])}<br/>Q3：${fmt.pct(d[4])}<br/>最大值：${fmt.pct(d[5])}`;
           },
         },
         grid: { left: 70, right: 30, top: 30, bottom: 30 },
@@ -312,7 +312,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
           <div className="flex items-start justify-between mb-3 gap-2">
             <div>
               <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">鏍稿績 vs 缁煎悎鍋夸粯鑳藉姏鍏呰冻鐜囨暎鐐瑰浘</div>
-              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">涓よ€呭樊璺濆弽鏄犺祫鏈川閲忥紱鐐瑰嚮鏌ョ湅鍏徃璇︽儏锛涘凡鎺掗櫎鏋佺鍊?/div>
+              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">二者差距反映资本质量；点击查看公司详情；已排除极端值</div>
             </div>
           </div>
           <div ref={scatterRef} style={{ height: 300 }} />
