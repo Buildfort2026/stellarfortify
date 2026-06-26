@@ -1,8 +1,12 @@
-{
-  "rewrites": [
-    { "source": "/insurance-data.json", "destination": "/insurance-data.json" },
-    { "source": "/logo/(.*)", "destination": "/logo/$1" },
-    { "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json))", "destination": "/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+{ 
+  "version": 2, 
+  "buildCommand": "vite build", 
+  "outputDirectory": "dist", 
+  "framework": "vite", 
+  "rewrites": [ 
+    { 
+      "source": "/api/(.*)", 
+      "destination": "/api/index.ts" 
+    } 
+  ] 
 }
