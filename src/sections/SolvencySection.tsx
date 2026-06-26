@@ -1,4 +1,4 @@
-import { useCallback, useRef, useEffect } from 'react';
+﻿import { useCallback, useRef, useEffect } from 'react';
 import * as echarts from 'echarts';
 import { fmt } from '@/utils/format';
 import type { Company } from '@/types/insurance';
@@ -29,7 +29,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
   useEffect(() => {
     // 1. Comprehensive Solvency Chart
     const cs1 = companies
-      .filter((c) => c.comp_solvency > 0 && c.name !== '人保健康' && !['C', 'D'].includes(c.rating))
+      .filter((c) => c.comp_solvency > 0 && c.name !== '浜轰繚鍋ュ悍' && !['C', 'D'].includes(c.rating))
       .sort((a, b) => b.comp_solvency - a.comp_solvency)
       .slice(0, 20);
     const ch1 = initChart(compSolRef.current, 'comp-sol');
@@ -38,7 +38,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
         backgroundColor: 'transparent',
         tooltip: {
           trigger: 'axis',
-          formatter: (p: any) => `<b>${p[0].name}</b><br/>综合偿付能力充足率：${fmt.pct(p[0].value)}`,
+          formatter: (p: any) => `<b>${p[0].name}</b><br/>缁煎悎鍋夸粯鑳藉姏鍏呰冻鐜囷細${fmt.pct(p[0].value)}`,
         },
         grid: { left: 110, right: 55, top: 10, bottom: 30 },
         xAxis: {
@@ -88,7 +88,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
 
     // 2. Core Solvency Chart
     const cs2 = companies
-      .filter((c) => c.core_solvency > 0 && c.name !== '人保健康' && !['C', 'D'].includes(c.rating))
+      .filter((c) => c.core_solvency > 0 && c.name !== '浜轰繚鍋ュ悍' && !['C', 'D'].includes(c.rating))
       .sort((a, b) => b.core_solvency - a.core_solvency)
       .slice(0, 20);
     const ch2 = initChart(coreSolRef.current, 'core-sol');
@@ -97,7 +97,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
         backgroundColor: 'transparent',
         tooltip: {
           trigger: 'axis',
-          formatter: (p: any) => `<b>${p[0].name}</b><br/>核心偿付能力充足率：${fmt.pct(p[0].value)}`,
+          formatter: (p: any) => `<b>${p[0].name}</b><br/>鏍稿績鍋夸粯鑳藉姏鍏呰冻鐜囷細${fmt.pct(p[0].value)}`,
         },
         grid: { left: 110, right: 55, top: 10, bottom: 30 },
         xAxis: {
@@ -141,7 +141,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
 
     // 3. Scatter Chart
     const filtered = companies.filter(
-      (c) => c.comp_solvency > 0 && c.core_solvency > 0 && !['人保健康', '恒安标准养老', '华汇人寿'].includes(c.name)
+      (c) => c.comp_solvency > 0 && c.core_solvency > 0 && !['浜轰繚鍋ュ悍', '鎭掑畨鏍囧噯鍏昏€?, '鍗庢眹浜哄'].includes(c.name)
     );
     const compTop10 = [...filtered].sort((a, b) => b.comp_solvency - a.comp_solvency).slice(0, 10).map((c) => c.name);
     const coreTop10 = [...filtered].sort((a, b) => b.core_solvency - a.core_solvency).slice(0, 10).map((c) => c.name);
@@ -154,11 +154,11 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
         backgroundColor: 'transparent',
         tooltip: {
           trigger: 'item',
-          formatter: (p: any) => `<b>${p.data[2]}</b><br/>综合：${fmt.pct(p.data[0])}<br/>核心：${fmt.pct(p.data[1])}`,
+          formatter: (p: any) => `<b>${p.data[2]}</b><br/>缁煎悎锛?{fmt.pct(p.data[0])}<br/>鏍稿績锛?{fmt.pct(p.data[1])}`,
         },
         grid: { left: 70, right: 30, top: 30, bottom: 55 },
         xAxis: {
-          name: '综合偿付能力充足率',
+          name: '缁煎悎鍋夸粯鑳藉姏鍏呰冻鐜?,
           nameLocation: 'middle',
           nameGap: 30,
           nameTextStyle: { color: '#8899b4', fontSize: 10 },
@@ -167,7 +167,7 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
           splitLine: { lineStyle: { color: 'rgba(255,255,255,0.05)' } },
         },
         yAxis: {
-          name: '核心偿付能力充足率',
+          name: '鏍稿績鍋夸粯鑳藉姏鍏呰冻鐜?,
           nameLocation: 'middle',
           nameGap: 50,
           nameTextStyle: { color: '#8899b4', fontSize: 10 },
@@ -183,9 +183,9 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
             itemStyle: {
               color: (p: any) => {
                 const tag = p.data[3];
-                if (tag === '行业头部') return '#63b3ed';
-                if (tag === '顶级水准') return '#4fd1c5';
-                if (tag === '相对健康') return '#68d391';
+                if (tag === '琛屼笟澶撮儴') return '#63b3ed';
+                if (tag === '椤剁骇姘村噯') return '#4fd1c5';
+                if (tag === '鐩稿鍋ュ悍') return '#68d391';
                 return '#f6ad55';
               },
               opacity: 0.85,
@@ -224,13 +224,13 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
           trigger: 'item',
           formatter: (p: any) => {
             const d = p.data;
-            return `<b>${p.name}</b><br/>最小值：${fmt.pct(d[1])}<br/>Q1：${fmt.pct(d[2])}<br/>中位数：${fmt.pct(d[3])}<br/>Q3：${fmt.pct(d[4])}<br/>最大值：${fmt.pct(d[5])}`;
+            return `<b>${p.name}</b><br/>鏈€灏忓€硷細${fmt.pct(d[1])}<br/>Q1锛?{fmt.pct(d[2])}<br/>涓綅鏁帮細${fmt.pct(d[3])}<br/>Q3锛?{fmt.pct(d[4])}<br/>鏈€澶у€硷細${fmt.pct(d[5])}`;
           },
         },
         grid: { left: 70, right: 30, top: 30, bottom: 30 },
         xAxis: {
           type: 'category',
-          data: ['综合偿付能力充足率', '核心偿付能力充足率'],
+          data: ['缁煎悎鍋夸粯鑳藉姏鍏呰冻鐜?, '鏍稿績鍋夸粯鑳藉姏鍏呰冻鐜?],
           axisLabel: { color: '#8899b4' },
           axisTick: { show: false },
           axisLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } },
@@ -266,9 +266,9 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
       <div className="flex items-start gap-2.5 mb-4 pb-3 border-b border-[rgba(99,179,237,0.12)]">
         <div className="sec-bar b1" />
         <div className="flex-1">
-          <div className="text-base font-bold text-[#e8edf5] leading-tight">偿付能力全景</div>
+          <div className="text-base font-bold text-[#e8edf5] leading-tight">鍋夸粯鑳藉姏鍏ㄦ櫙</div>
           <div className="text-[11px] text-[#4a5a72] mt-1">
-            综合偿付能力充足率 · 核心偿付能力充足率 · 风险综合评级 — 监管核心三项指标
+            缁煎悎鍋夸粯鑳藉姏鍏呰冻鐜?路 鏍稿績鍋夸粯鑳藉姏鍏呰冻鐜?路 椋庨櫓缁煎悎璇勭骇 鈥?鐩戠鏍稿績涓夐」鎸囨爣
           </div>
         </div>
       </div>
@@ -277,8 +277,8 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
         <div className="bg-[#111e35] border border-[rgba(99,179,237,0.12)] rounded-xl p-4">
           <div className="flex items-start justify-between mb-3 gap-2">
             <div>
-              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">综合偿付能力充足率排名（Top 20）</div>
-              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">监管要求≥100%，充足率越高资本越充裕；部分公司数据未采纳</div>
+              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">缁煎悎鍋夸粯鑳藉姏鍏呰冻鐜囨帓鍚嶏紙Top 20锛?/div>
+              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">鐩戠瑕佹眰鈮?00%锛屽厖瓒崇巼瓒婇珮璧勬湰瓒婂厖瑁曪紱閮ㄥ垎鍏徃鏁版嵁鏈噰绾?/div>
             </div>
           </div>
           <div ref={compSolRef} style={{ height: 480 }} />
@@ -287,8 +287,8 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
         <div className="bg-[#111e35] border border-[rgba(99,179,237,0.12)] rounded-xl p-4">
           <div className="flex items-start justify-between mb-3 gap-2">
             <div>
-              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">核心偿付能力充足率排名（Top 20）</div>
-              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">低于100%为监管重点关注对象，低于50%触发监管红线；部分公司数据未采纳</div>
+              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">鏍稿績鍋夸粯鑳藉姏鍏呰冻鐜囨帓鍚嶏紙Top 20锛?/div>
+              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">浣庝簬100%涓虹洃绠￠噸鐐瑰叧娉ㄥ璞★紝浣庝簬50%瑙﹀彂鐩戠绾㈢嚎锛涢儴鍒嗗叕鍙告暟鎹湭閲囩撼</div>
             </div>
           </div>
           <div ref={coreSolRef} style={{ height: 480 }} />
@@ -298,8 +298,8 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
         <div className="p-0 bg-transparent border-none">
           <div className="flex items-start justify-between mb-3 gap-2">
             <div>
-              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">风险综合评级分布</div>
-              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">评级金字塔 — AAA为塔尖，层层向下评级逐渐降低</div>
+              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">椋庨櫓缁煎悎璇勭骇鍒嗗竷</div>
+              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">璇勭骇閲戝瓧濉?鈥?AAA涓哄灏栵紝灞傚眰鍚戜笅璇勭骇閫愭笎闄嶄綆</div>
             </div>
           </div>
           <PyramidChart companies={companies} />
@@ -311,8 +311,8 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
         <div className="bg-[#111e35] border border-[rgba(99,179,237,0.12)] rounded-xl p-4">
           <div className="flex items-start justify-between mb-3 gap-2">
             <div>
-              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">核心 vs 综合偿付能力充足率散点图</div>
-              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">两者差距反映资本质量；点击查看公司详情；已排除极端值</div>
+              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">鏍稿績 vs 缁煎悎鍋夸粯鑳藉姏鍏呰冻鐜囨暎鐐瑰浘</div>
+              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">涓よ€呭樊璺濆弽鏄犺祫鏈川閲忥紱鐐瑰嚮鏌ョ湅鍏徃璇︽儏锛涘凡鎺掗櫎鏋佺鍊?/div>
             </div>
           </div>
           <div ref={scatterRef} style={{ height: 300 }} />
@@ -320,8 +320,8 @@ export default function SolvencySection({ companies, onCompanyClick }: SolvencyS
         <div className="bg-[#111e35] border border-[rgba(99,179,237,0.12)] rounded-xl p-4">
           <div className="flex items-start justify-between mb-3 gap-2">
             <div>
-              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">偿付能力充足率行业分布</div>
-              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">展示行业整体分布水平与离散程度</div>
+              <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">鍋夸粯鑳藉姏鍏呰冻鐜囪涓氬垎甯?/div>
+              <div className="text-[11px] text-[#4a5a72] mt-0.5 leading-snug">灞曠ず琛屼笟鏁翠綋鍒嗗竷姘村钩涓庣鏁ｇ▼搴?/div>
             </div>
           </div>
           <div ref={boxRef} style={{ height: 300 }} />
@@ -380,7 +380,7 @@ function PyramidChart({ companies }: { companies: Company[] }) {
   const mnX = Math.min(...allP.map((p) => p.px)), mxX = Math.max(...allP.map((p) => p.px));
   const mnY = Math.min(...allP.map((p) => p.py)), mxY = Math.max(...allP.map((p) => p.py));
 
-  const LGW = 82, PAD = 12;
+  const LGW = 110, PAD = 12;
   const dW = W - LGW - PAD * 2, dH = H - PAD * 2;
   const sc = Math.min(dW / (mxX - mnX), dH / (mxY - mnY)) * 0.90;
   const ox = PAD + dW / 2 - (mnX + mxX) / 2 * sc;
@@ -441,11 +441,7 @@ function PyramidChart({ companies }: { companies: Company[] }) {
               style={{ cursor: 'pointer' }}
               onMouseEnter={(e) => { (e.currentTarget as SVGGElement).style.filter = 'brightness(1.20) drop-shadow(0 4px 12px rgba(200,230,255,0.30))'; }}
               onMouseLeave={(e) => { (e.currentTarget as SVGGElement).style.filter = ''; }}
-              onClick={() => {
-                const names = cs.filter((c) => c.rating === rating).map((c) => c.name);
-                // Simple alert for now - could be a modal
-                console.log(rating + ' 级评级公司:', names);
-              }}
+              onClick={() => { const names = cs.filter((c) => c.rating === rating).map((c) => c.name); if (names.length === 1) { onCompanyClick(names[0]); } else { console.log(rating + ' 等级公司:', names); } }}
             >
               <polygon points={pStr([bP[0], bP[1], tP[1], tP[0]])} fill={`url(#gR${rating})`} stroke={col.stroke} strokeWidth="0.8" strokeLinejoin="round" />
               <polygon points={pStr([bP[0], bP[3], tP[3], tP[0]])} fill={`url(#gL${rating})`} stroke={col.stroke} strokeWidth="0.8" strokeLinejoin="round" />
@@ -468,8 +464,7 @@ function PyramidChart({ companies }: { companies: Company[] }) {
               </text>
               {counts[rating] && (
                 <text x={lx + 45} y={ly + 11} fill="#4a6080" fontSize="10" fontFamily="Inter, system-ui, sans-serif">
-                  {counts[rating]}家
-                </text>
+                  {counts[rating]}瀹?                </text>
               )}
             </g>
           );
@@ -487,8 +482,8 @@ function AAAHall({ companies, onCompanyClick }: { companies: Company[]; onCompan
   return (
     <div className="mt-1 pt-1 border-t border-[rgba(99,179,237,0.08)]">
       <div className="mb-1.5">
-        <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">寿险公司 AAA 榜</div>
-        <div className="text-[11px] text-[#4a5a72] mt-0.5">监管认证的尖子生</div>
+        <div className="text-[13px] font-bold text-[#e8edf5] leading-snug">瀵块櫓鍏徃 AAA 姒?/div>
+        <div className="text-[11px] text-[#4a5a72] mt-0.5">鐩戠璁よ瘉鐨勫皷瀛愮敓</div>
       </div>
       <div className="grid grid-cols-4 gap-2">
         {aaa.map((c, idx) => {
@@ -499,7 +494,7 @@ function AAAHall({ companies, onCompanyClick }: { companies: Company[]; onCompan
               key={c.name}
               className={`aaa-item ${colorClass}`}
               onClick={() => onCompanyClick(c.name)}
-              title={`${c.name} — 点击查看详情`}
+              title={`${c.name} 鈥?鐐瑰嚮鏌ョ湅璇︽儏`}
             >
               <img
                 src={logoPath}
@@ -515,3 +510,5 @@ function AAAHall({ companies, onCompanyClick }: { companies: Company[]; onCompan
     </div>
   );
 }
+
+

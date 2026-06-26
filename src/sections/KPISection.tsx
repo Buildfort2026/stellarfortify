@@ -140,15 +140,23 @@ export default function KPISection({ companies, qData, prevQData }: KPISectionPr
   );
 }
 
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+
 function InfoTip({ text }: { text: string }) {
   return (
-    <span className="group relative inline-flex">
-      <button className="w-4 h-4 rounded-full border border-[#4a5a72] bg-transparent text-[#4a5a72] inline-flex items-center justify-center text-[9px] font-extrabold cursor-pointer hover:border-[#63b3ed] hover:text-[#63b3ed]">
-        i
-      </button>
-      <span className="hidden group-hover:block fixed z-[9999] bg-[#1e2d4a] border border-[rgba(99,179,237,0.3)] rounded-lg px-3.5 py-2 text-[11px] text-[#8899b4] w-[220px] leading-relaxed shadow-xl pointer-events-none whitespace-normal">
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button className="w-4 h-4 rounded-full border border-[#4a5a72] bg-transparent text-[#4a5a72] inline-flex items-center justify-center text-[9px] font-extrabold cursor-pointer hover:border-[#63b3ed] hover:text-[#63b3ed] ml-0.5">
+          i
+        </button>
+      </TooltipTrigger>
+      <TooltipContent 
+        side="top" 
+        sideOffset={6}
+        className="bg-[#1e2d4a] border border-[rgba(99,179,237,0.3)] rounded-lg px-3.5 py-2 text-[11px] text-[#8899b4] w-[220px] leading-relaxed shadow-xl"
+      >
         {text}
-      </span>
-    </span>
+      </TooltipContent>
+    </Tooltip>
   );
 }
